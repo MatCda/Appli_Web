@@ -13,6 +13,7 @@ namespace Appli_Web.Pages.Personne
     public class CreateModel : PageModel
     {
         private readonly Appli_Web.Data.Appli_WebContext _context;
+        public string Message { get; set; }
 
         public CreateModel(Appli_Web.Data.Appli_WebContext context)
         {
@@ -26,17 +27,25 @@ namespace Appli_Web.Pages.Personne
 
         [BindProperty]
         public Models.Personne Personne { get; set; }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            Personne.Age = DateTime.Today.Year - Personne.Birthdate.Year;
+
+            if (Personne.Age >=150)
+            {
+                Message = "Age non crédible - Vérifier la date de naissance";
+                return Page();
+            }
             _context.Personne.Add(Personne);
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
