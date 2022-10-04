@@ -14,6 +14,7 @@ namespace Appli_Web.Pages.Personne
     public class EditModel : PageModel
     {
         private readonly Appli_Web.Data.Appli_WebContext _context;
+        public string Message { get; set; }
 
         public EditModel(Appli_Web.Data.Appli_WebContext context)
         {
@@ -45,6 +46,14 @@ namespace Appli_Web.Pages.Personne
         {
             if (!ModelState.IsValid)
             {
+                return Page();
+            }
+
+            Personne.Age = DateTime.Today.Year - Personne.Birthdate.Year;
+
+            if (Personne.Age >= 150)
+            {
+                Message = "Age non crédible - Vérifier la date de naissance";
                 return Page();
             }
 
