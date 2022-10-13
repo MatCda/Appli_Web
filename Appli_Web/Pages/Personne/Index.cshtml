@@ -2,10 +2,10 @@
 @model Appli_Web.Pages.Personne.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Personne";
 }
 
-<h1>Index</h1>
+<h1>Personne</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,22 +14,24 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Perosnne[0].Name)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Personne[0].Name)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Perosnne[0].FirstName)
+                @Html.DisplayNameFor(model => model.Personne[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Perosnne[0].Birthdate)
+                @Html.DisplayNameFor(model => model.Personne[0].Birthdate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Perosnne[0].Age)
+                @Html.DisplayNameFor(model => model.Personne[0].Age)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Perosnne)
+        @foreach (var item in Model.Personne)
         {
             <tr>
                 <td>
